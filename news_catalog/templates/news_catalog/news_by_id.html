@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtered News</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/news_by_id.css' %}">
+</head>
+<body style="display: flex;flex-direction: column">
+    <header class="header">
+
+        <div class="logo_search_wrapper">
+            <!-- Лого -->
+             <div class="image_logo_container">
+                 <img class="image_logo" src="../../static/images/logo.png" alt="Logo" onclick="navigateToMainPage()">
+             </div>
+
+        </div>
+
+        <div class="filters_container">
+            <div class="headline_date_wrapper">
+                <h3 class="headline">{{ news_item.headline }}</h3>
+                <p class="publication_date">{{ news_item.news_id__publication_date }}</p>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="aside_main_wrapper">
+        <aside class="aside">
+            <div class="sidebar">
+                <!-- Категорії -->
+                <ul id="categories-list">
+                    {% for category in categories %}
+                        <li data-category="{{ category.name }}">{{ category.name }}</li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Тони -->
+                <ul id="tones-list">
+                    <li data-tone="POSITIVE">Позитивні</li>
+                    <li data-tone="NEUTRAL">Нейтральні</li>
+                    <li data-tone="NEGATIVE">Негативні</li>
+                </ul>
+            </div>
+        </aside>
+
+
+    <main class="main">
+        <!-- Список новин -->
+        <article>
+           <div>
+                {% if news_item.news_id__image_url %}
+                        <div class="image-container">
+                            <img class="news-image" src="{{ news_item.news_id__image_url }}" alt="News Image">
+                        </div>
+                {% endif %}
+
+                <p class="content_text">{{ news_item.content }}</p>
+                <div id="sentimentScore" data-score="{{ news_item.news_id__sentiment_score }}"></div>
+
+           </div>
+
+            <div class="ton_score_new_source_wrapper">
+                <div>
+                    {% if news_item.news_id__sentiment_label == "POSITIVE" %}
+                        <p class="sentiment_label">Емоційний тон: позитивний</p>
+                    {% elif news_item.news_id__sentiment_label == "NEGATIVE" %}
+                        <p class="sentiment_label">Емоційний тон: негативний</p>
+                    {% elif news_item.news_id__sentiment_label == "NEUTRAL" %}
+                        <p class="sentiment_label">Емоційний тон: нейтральний</p>
+                    {% endif %}
+                    <a class="news_source" target="_blank" href="{{ news_item.news_id__news_source }}">Перейти до першоджерела</a>
+                </div>
+
+                <div class="slider-container">
+                    <div class="slider-line"></div>
+                    <div class="slider-dot" id="sliderDot"></div>
+                </div>
+
+            </div>
+        </article>
+
+
+    </main>
+
+    </div>
+
+    <script src="{% static 'js/script_news_by_id.js' %}"></script>
+</body>
+</html>

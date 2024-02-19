@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News List</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/news_list.css' %}">
+</head>
+<body style="display: flex;flex-direction: column">
+    <header class="header">
+
+        <div class="logo_search_wrapper">
+            <!-- Лого -->
+             <div class="image_logo_container" >
+                 <img class="image_logo" src="../../static/images/logo.png" alt="Logo" onclick="navigateToMainPage()">
+             </div>
+
+            <!-- Пошук -->
+            <div class="search_container">
+                <div class="search_icon_input_wrapper">
+                    <input type="text" id="search-input" placeholder="Пошук новини" oninput="applyFilters()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Фільтри -->
+        <div class="filters_container">
+            <select id="categories-filter">
+                <option value="all">Усі категорії</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <select id="tones-filter">
+                <option value="all">Будь-який тон</option>
+                <option value="NEGATIVE">Негативний</option>
+                <option value="NEUTRAL">Нейтральний</option>
+                <option value="POSITIVE">Позитивний</option>
+            </select>
+
+            <div class="date_picker">
+                <input type="text" id="dates-filter" data-input placeholder="Усі дати">
+
+                <div class="calendar_icon_wrapper" onclick="clearDate()">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+                  <path d="M6.445 11.688V6.354h-.633A13 13 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23"/>
+                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                </svg>
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+
+    <div class="aside_main_wrapper">
+        <div class="absolute_aside_wrapper">
+            <aside class="aside">
+        <div class="sidebar">
+            <!-- Категорії -->
+            <ul id="categories-list">
+                {% for category in categories %}
+                    <li data-category="{{ category.name }}">{{ category.name }}</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Тони -->
+            <ul id="tones-list">
+                <li data-tone="POSITIVE">Позитивні</li>
+                <li data-tone="NEUTRAL">Нейтральні</li>
+                <li data-tone="NEGATIVE">Негативні</li>
+            </ul>
+        </div>
+        </aside>
+        </div>
+
+
+        <main class="main" id="main-content">
+        <!-- Список новин -->
+        <ul id="news-list">
+        </ul>
+
+    </main>
+    </div>
+
+     <footer class="pagination-container">
+        <ul class="paginator" id="pagination-list">
+        </ul>
+    </footer>
+
+    <script src="{% static 'js/script_news_list.js' %}"></script>
+</body>
+</html>

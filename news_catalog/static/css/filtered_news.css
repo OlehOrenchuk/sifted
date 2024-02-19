@@ -1,0 +1,226 @@
+/* filtered_news.css */
+
+html,body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.disabled {
+    pointer-events: none; /* Disable pointer events, making it unclickable */
+    color: #777;
+    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+}
+
+.aside_main_wrapper {
+    position: relative;
+    display: flex;
+}
+
+/*Header Styling*/
+
+.header{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+}
+
+.logo_search_wrapper {
+    position: relative;
+    display: flex;
+}
+
+.image_logo_container {
+    position: fixed;
+    z-index: 3;
+}
+
+.image_logo {
+    height: 60px;
+    cursor: pointer;
+}
+
+.filters_container {
+    display: flex;
+    /*gap: 60px;*/
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+}
+
+.filters_container select,
+.filters_container input[type="text"] {
+    padding: 0 10px;
+    height: 45px;
+    border: 2px solid black;
+}
+
+.filters_container select,
+.filters_container input[type="text"] {
+    min-width: 200px;
+}
+
+.filters_container input[type="text"] {
+    min-width: 230px;
+}
+
+.filters_container input[type="text"]::placeholder {
+    color: black;
+}
+
+.date_picker {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+
+.calendar_icon_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    border-left: 2px solid black;
+    height: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/*Aside Styling*/
+
+.aside {
+    position: fixed;
+
+    top: 15rem;
+    display: flex;
+    padding-left: 80px;
+    z-index: 2;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    text-align: center;
+}
+
+
+.sidebar li {
+    margin: 0;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 9px 14px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.sidebar li:hover {
+    background-color: lightgrey;
+}
+
+/*Main Styling*/
+
+.main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+#news-list {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+#news-list li {
+    list-style: none;
+    font-size: 18px;
+    margin: 0;
+    font-weight: 500;
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#news-list a {
+    text-decoration: none;
+    color: #333333;
+}
+
+#news-list li:hover {
+    background-color: lightgrey;
+}
+
+
+/*Footer Styling - Pagination*/
+
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 60px 30px;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+}
+
+.paginator li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+}
+
+
+.paginator li a {
+    overflow: hidden;
+    border-radius: 50px;
+    border: 1px solid lightgrey;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: #777;
+    text-decoration: none;
+}
+
+.paginator .active {
+    background-color: #3c82c7;
+    border-radius: 50px;
+}
+
+.paginator li a:hover {
+    background-color: #3c82c7;
+    color: white;
+}
+
+.paginator .active a {
+    color: white;
+}

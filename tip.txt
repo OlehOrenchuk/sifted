@@ -1,0 +1,28 @@
+#create migrations to database to make superuser available saving session data to database
+python manage.py makemigrations
+python manage.py migrate
+
+#create Django admin account
+python manage.py createsuperuser
+
+#run server
+python manage.py runserver
+
+# requirements
+pip install pyodbc
+pip install django-pyodbc-azure
+
+# create requirements
+pip freeze > requirements.txt
+
+# install requirements
+pip install -r requirements.txt
+
+# in Azure Data Studio
+CREATE DATABASE [news_resource]
+
+#fixed MS SQL connect by adding libodbc for MacOS/Linux
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
+brew update
+HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql17 mssql-tools
